@@ -39,6 +39,114 @@ const predefinedStrategies = [
     sellCondition: "ma_10 < ma_50",
     risk: "Medium",
     category: "Trend Following"
+  },
+  {
+    id: 4,
+    name: "Bollinger Bands Squeeze",
+    description: "Buy when price touches lower Bollinger Band, sell at upper band",
+    buyCondition: "price <= bb_lower",
+    sellCondition: "price >= bb_upper",
+    risk: "Medium",
+    category: "Technical"
+  },
+  {
+    id: 5,
+    name: "MACD Golden Cross",
+    description: "Buy when MACD line crosses above signal line",
+    buyCondition: "macd > macd_signal",
+    sellCondition: "macd < macd_signal",
+    risk: "Low",
+    category: "Technical"
+  },
+  {
+    id: 6,
+    name: "Volume Breakout",
+    description: "Buy when volume spikes 200% above average with price increase",
+    buyCondition: "volume > avg_volume * 3 && price_change_1h > 2",
+    sellCondition: "volume < avg_volume * 0.8",
+    risk: "High",
+    category: "Momentum"
+  },
+  {
+    id: 7,
+    name: "Support and Resistance",
+    description: "Buy at support levels, sell at resistance levels",
+    buyCondition: "price <= support_level * 1.02",
+    sellCondition: "price >= resistance_level * 0.98",
+    risk: "Medium",
+    category: "Technical"
+  },
+  {
+    id: 8,
+    name: "Scalping Bot",
+    description: "Quick trades on small price movements (0.5-1%)",
+    buyCondition: "price_change_5m < -0.5",
+    sellCondition: "price_change_5m > 0.8",
+    risk: "High",
+    category: "Scalping"
+  },
+  {
+    id: 9,
+    name: "DCA Strategy",
+    description: "Dollar Cost Averaging - buy fixed amounts on price drops",
+    buyCondition: "price_change_24h < -3",
+    sellCondition: "portfolio_profit > 15",
+    risk: "Low",
+    category: "DCA"
+  },
+  {
+    id: 10,
+    name: "Mean Reversion",
+    description: "Buy when price deviates significantly from moving average",
+    buyCondition: "price < ma_20 * 0.95",
+    sellCondition: "price > ma_20 * 1.05",
+    risk: "Medium",
+    category: "Mean Reversion"
+  },
+  {
+    id: 11,
+    name: "Momentum Breakout",
+    description: "Buy on strong upward momentum with high volume",
+    buyCondition: "price_change_1h > 3 && rsi > 60 && volume > avg_volume * 2",
+    sellCondition: "rsi > 80 || price_change_1h < -2",
+    risk: "High",
+    category: "Momentum"
+  },
+  {
+    id: 12,
+    name: "Stochastic RSI Bot",
+    description: "Buy when Stochastic RSI is oversold, sell when overbought",
+    buyCondition: "stoch_rsi < 20",
+    sellCondition: "stoch_rsi > 80",
+    risk: "Low",
+    category: "Technical"
+  },
+  {
+    id: 13,
+    name: "Grid Trading Bot",
+    description: "Buy at predefined levels below current price, sell above",
+    buyCondition: "price <= grid_buy_level",
+    sellCondition: "price >= grid_sell_level",
+    risk: "Medium",
+    category: "Grid Trading"
+  },
+  {
+    id: 14,
+    name: "News Sentiment Bot",
+    description: "Trade based on market sentiment and news analysis",
+    buyCondition: "sentiment_score > 0.7 && news_impact > 0.5",
+    sellCondition: "sentiment_score < 0.3 || news_impact < -0.5",
+    risk: "High",
+    category: "Sentiment"
+  },
+  {
+    id: 15,
+    name: "Arbitrage Hunter",
+    description: "Exploit price differences between exchanges",
+    buyCondition: "price_diff_exchanges > 1.5",
+    sellCondition: "price_diff_exchanges < 0.5",
+    risk: "Low",
+    category: "Arbitrage"
   }
 ];
 

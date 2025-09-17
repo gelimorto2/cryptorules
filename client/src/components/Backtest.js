@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -34,12 +34,29 @@ const Backtest = () => {
   });
   const [backtestResults, setBacktestResults] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [strategies, setStrategies] = useState([]);
 
-  const strategies = [
-    { id: '1', name: 'Buy Low Sell High' },
-    { id: '2', name: 'RSI Oversold' },
-    { id: '3', name: 'Moving Average Crossover' }
-  ];
+  useEffect(() => {
+    fetchStrategies();
+  }, []);
+
+  const fetchStrategies = async () => {
+    try {
+      const response = await axios.get('/api/strategies/predefined');
+      setStrategies(response.data.map(strategy => ({
+        id: strategy.id.toString(),
+        name: strategy.name
+      })));
+    } catch (error) {
+      console.error('Error fetching strategies:', error);
+      // Fallback to original strategies if API fails
+      setStrategies([
+        { id: '1', name: 'Buy Low Sell High' },
+        { id: '2', name: 'RSI Oversold' },
+        { id: '3', name: 'Moving Average Crossover' }
+      ]);
+    }
+  };
 
   const handleBacktest = async (e) => {
     e.preventDefault();
